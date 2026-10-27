@@ -6,192 +6,194 @@
 <title>瑞士制排陣系統</title>
 <style>
 :root{
-  --bg:#f4f6f9; --card:#fff; --ink:#1d2433; --muted:#6b7385; --line:#dfe3ea;
-  --brand:#1f497d; --brand-ink:#fff; --brand-soft:#e6edf6;
-  --win:#c62828; --ok:#2e7d32; --warn-bg:#fff6e0; --warn-ink:#8a5a00;
-  --gold:#c00000; --silver:#0070c0; --bronze:#00a050;
+  color-scheme: light;
+  --ui:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;
+  --cell:"PMingLiU","MingLiU","新細明體","Noto Serif TC","Songti TC",serif;
+  --line:#c8c8c8; --thick:#000;
+  --id-bg:#f8cbad; --opp-bg:#ccff99; --blue:#0070c0;
+  --c-main:#ff0000; --c-sos:#3333cc; --c-sodos:#843c0c; --c-head:#cc0099; --c-sosos:#00b050;
+  --sel:#217346; --bar:#f3f3f3; --bar-line:#d6d6d6;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;font-size:15px;line-height:1.5}
-header{background:var(--brand);color:var(--brand-ink);padding:14px 16px}
-header .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
-#title{flex:1 1 260px;font-size:20px;font-weight:700;color:inherit;background:transparent;border:1px solid transparent;
-  border-radius:6px;padding:4px 8px;font-family:inherit;min-width:0}
-#title:hover,#title:focus{border-color:rgba(255,255,255,.5);outline:none;background:rgba(255,255,255,.08)}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{background:rgba(255,255,255,.15);border-radius:999px;padding:2px 12px;font-size:13px}
-.wrap{max-width:1100px;margin:0 auto}
-nav{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-nav .wrap{display:flex;overflow-x:auto}
-nav button{flex:0 0 auto;border:0;background:none;padding:12px 16px;font:inherit;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent}
-nav button.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:700}
-main{padding:16px}
-section{display:none}
-section.on{display:block}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:16px}
-h2{font-size:17px;margin:0 0 12px}
-.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer}
-.btn:hover{border-color:var(--brand)}
-.btn.primary{background:var(--brand);color:var(--brand-ink);border-color:var(--brand);font-weight:700}
-.btn.small{padding:4px 10px;font-size:13px}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-textarea{width:100%;min-height:260px;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;resize:vertical}
-select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
-.hint{color:var(--muted);font-size:13px}
-.msg{border-radius:8px;padding:10px 14px;margin:12px 0;white-space:pre-line;display:none}
-.msg.show{display:block}
-.msg.info{background:var(--brand-soft);color:var(--brand)}
-.msg.warn{background:var(--warn-bg);color:var(--warn-ink)}
-.msg.err{background:#fde8e8;color:#9b1c1c}
-.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{border-collapse:collapse;width:100%;font-size:14px}
-th,td{border:1px solid var(--line);padding:6px 8px;text-align:center;white-space:nowrap}
-th{background:var(--brand-soft);color:var(--brand);font-weight:700}
-tr.wd td{color:#a0a6b2}
-.roster-list{columns:3 180px;column-gap:16px;margin-top:12px}
-.roster-item{break-inside:avoid;display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px dashed var(--line)}
-.roster-item.wd .nm{color:#a0a6b2;text-decoration:line-through}
-.rtabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
-.rtab{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 14px;cursor:pointer;font:inherit;font-size:14px}
-.rtab.on{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
-.rtab:disabled{opacity:.35;cursor:default}
-.pairs td.p{cursor:pointer;min-width:120px}
-.pairs td.p:hover{background:var(--brand-soft)}
-.pairs td.p.w{color:var(--win);font-weight:700}
-.pairs td.p.w::after{content:" ○";}
-.pairs td.p.l{color:var(--muted)}
-.pairs .sc{color:var(--muted);font-size:12px}
-.progress{font-size:13px;color:var(--muted);margin-left:auto}
-.rank1 td:first-child{color:var(--gold);font-weight:700}
-.rank2 td:first-child{color:var(--silver);font-weight:700}
-.rank3 td:first-child{color:var(--bronze);font-weight:700}
-.top td{font-weight:700}
-.help ol{padding-left:20px;margin:0}
-.help li{margin-bottom:8px}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:20px 16px 32px}
-.print-only{display:none}
+html,body{height:100%;margin:0}
+body{display:flex;flex-direction:column;background:#fff;color:#000;font-family:var(--ui);font-size:14px}
+
+/* 上方工具列（對應 Excel 右側的按鈕） */
+.toolbar{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:8px 12px;background:var(--bar);border-bottom:1px solid var(--bar-line)}
+.grp{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.btn,.toolbar button{font:inherit;border:1px solid #bdbdbd;background:#fff;border-radius:4px;padding:6px 12px;cursor:pointer;color:#000}
+.btn:hover,.toolbar button:hover{background:#e8f2ec;border-color:var(--sel)}
+.toolbar button.act{background:var(--sel);color:#fff;border-color:var(--sel);font-weight:700}
+.toolbar button.act:hover{background:#1a5c38}
+.toolbar select{font:inherit;padding:5px 6px;border:1px solid #bdbdbd;border-radius:4px;background:#fff}
+.sep{width:1px;height:24px;background:var(--bar-line)}
+
+main{flex:1;min-height:0;position:relative}
+.sheet{position:absolute;inset:0;display:none;flex-direction:column}
+.sheet.on{display:flex}
+
+/* 賽程表 */
+.title{display:block;width:100%;border:0;text-align:center;font-family:var(--cell);font-weight:700;font-size:22px;padding:12px 8px;outline:none;background:transparent}
+.title:hover,.title:focus{background:#fafafa}
+.wrap{flex:1;min-height:0;overflow:auto;position:relative;padding:0 12px 12px}
+table.grid{border-collapse:separate;border-spacing:0;font-family:var(--cell);font-weight:700;font-size:15px;user-select:none}
+.grid th,.grid td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);height:32px;padding:0 4px;text-align:center;white-space:nowrap;background:#fff}
+.grid thead th{position:sticky;z-index:2;border-bottom:1px solid var(--thick)}
+.grid thead tr:first-child th{top:0;height:38px;font-size:17px;border-top:2px solid var(--thick)}
+.grid thead tr:nth-child(2) th{top:38px;font-size:12px}
+.grid th.h-id,.grid td.c-id{position:sticky;left:0;z-index:1;min-width:46px;border-left:2px solid var(--thick)}
+.grid th.h-name,.grid td.c-name{position:sticky;left:46px;z-index:1;min-width:96px;border-right:1px solid var(--thick)}
+.grid thead th.h-id,.grid thead th.h-name{z-index:3}
+.grid td.c-id{background:var(--id-bg);color:var(--blue)}
+.grid td.c-name{text-align:center}
+.grid .rs{border-left:1px solid var(--thick)}
+.grid td.c-res,.grid th.h-res{min-width:44px}
+.grid td.c-opp{background:var(--opp-bg);color:var(--blue);min-width:44px}
+.grid th.h-opp{color:var(--blue)}
+.grid td.c-res.win{color:#000}
+.grid td.st{min-width:52px}
+.grid .k-main{color:var(--c-main);font-size:17px}
+.grid .k-sos{color:var(--c-sos)}
+.grid .k-sodos{color:var(--c-sodos)}
+.grid .k-head{color:var(--c-head)}
+.grid .k-sosos{color:var(--c-sosos)}
+.grid .k-rank{color:var(--blue);border-right:2px solid var(--thick)}
+.grid th.h-stat{border-left:2px solid var(--thick)}
+.grid td.k-main,.grid th.k-main{border-left:2px solid var(--thick)}
+.grid tbody tr:last-child td{border-bottom:2px solid var(--thick)}
+.grid tr.wd td.c-name{color:#999}
+.grid tr.dummy td.c-name::after{content:"（輪空用）";color:#aaa;font-size:12px;font-weight:400}
+.grid td.cur{background-image:linear-gradient(rgba(33,115,70,.08),rgba(33,115,70,.08))}
+.grid td.sel{outline:2px solid var(--sel);outline-offset:-2px}
+.kb{position:absolute;opacity:0;pointer-events:none;border:2px solid var(--sel);font-family:var(--cell);font-weight:700;font-size:15px;text-align:center;padding:0 2px;z-index:4;background:#fff;color:#000;outline:none}
+.kb.editing{opacity:1;pointer-events:auto}
+
+/* 最終排名（照 VBA 產生的格式） */
+.pad{flex:1;overflow:auto;padding:16px}
+table.rank{border-collapse:collapse;font-family:"Microsoft JhengHei",var(--ui);font-size:15px}
+.rank th,.rank td{border:1px solid #000;padding:0 14px;height:34px;text-align:center;white-space:nowrap}
+.rank th{background:#1f497d;color:#fff;height:40px}
+.rank tr:nth-child(odd) td{background:#f2f2f2}
+.rank tr.top td{font-weight:700}
+.rank tr.r1 td:first-child{color:#c00000}
+.rank tr.r2 td:first-child{color:#0070c0}
+.rank tr.r3 td:first-child{color:#00b050}
+.rank tr.wd td{color:#a0a0a0}
+.credit{color:#b4b4b4;font-size:11px;margin-top:10px}
+.empty{color:#666;padding:24px 0}
+.help{max-width:760px;line-height:1.8;font-size:15px}
+.help h2{font-size:20px;margin:0 0 8px}
+.help table{border-collapse:collapse;margin:8px 0}
+.help td{border:1px solid #ccc;padding:4px 10px}
+kbd{border:1px solid #bbb;border-bottom-width:2px;border-radius:3px;padding:0 5px;font-size:12px;background:#fafafa}
+
+/* 下方工作表分頁＋狀態列 */
+.tabs{display:flex;align-items:stretch;background:var(--bar);border-top:1px solid var(--bar-line);overflow-x:auto}
+.tabs button{font:inherit;border:0;border-right:1px solid var(--bar-line);background:transparent;padding:8px 18px;cursor:pointer;white-space:nowrap;color:#444}
+.tabs button.on{background:#fff;color:var(--sel);font-weight:700;box-shadow:inset 0 -3px 0 var(--sel)}
+.status{margin-left:auto;padding:8px 12px;color:#555;font-size:12px;white-space:nowrap;align-self:center}
+
+/* 對話框（仿 MsgBox / InputBox） */
+dialog{border:1px solid #999;border-radius:6px;padding:0;min-width:300px;max-width:90vw;box-shadow:0 8px 30px rgba(0,0,0,.25);font-family:var(--ui)}
+dialog::backdrop{background:rgba(0,0,0,.25)}
+.dlg-h{background:var(--bar);padding:8px 14px;font-weight:700;border-bottom:1px solid var(--bar-line)}
+.dlg-b{padding:16px 18px;white-space:pre-line;line-height:1.7}
+.dlg-b input{display:block;width:100%;margin-top:10px;font:inherit;padding:6px 8px;border:1px solid #999;border-radius:4px}
+.dlg-f{display:flex;justify-content:flex-end;gap:8px;padding:0 14px 14px}
+.dlg-f button{font:inherit;min-width:80px;padding:6px 12px;border:1px solid #bdbdbd;border-radius:4px;background:#fff;cursor:pointer}
+.dlg-f button.ok{background:var(--sel);color:#fff;border-color:var(--sel)}
+.toast{position:fixed;left:50%;bottom:56px;transform:translateX(-50%);background:#323232;color:#fff;padding:10px 18px;border-radius:6px;white-space:pre-line;max-width:90vw;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20;font-size:14px;line-height:1.6}
+.toast.show{opacity:.95}
+
 @media (max-width:600px){
-  main{padding:12px}
-  .card{padding:12px}
-  .pairs td.p{min-width:90px}
+  .toolbar{padding:6px 8px;gap:6px}
+  .sep{display:none}
+  .wrap{padding:0 4px 8px}
+  .title{font-size:18px}
 }
 @media print{
-  header,nav,footer,.no-print,.msg{display:none !important}
-  body{background:#fff;font-size:12pt}
-  main{padding:0}
-  .card{border:0;padding:0}
-  .print-only{display:block;text-align:center;font-size:16pt;font-weight:700;margin-bottom:8px}
-  th{background:#eee !important;color:#000 !important}
-  .pairs td.p.w::after{content:""}
+  @page{size:landscape;margin:8mm}
+  .toolbar,.tabs,.kb,.toast,dialog{display:none !important}
+  html,body,main{height:auto;display:block}
+  .sheet{position:static;display:none}
+  .sheet.on{display:block}
+  .wrap,.pad{overflow:visible;padding:0}
+  .grid thead th,.grid th.h-id,.grid td.c-id,.grid th.h-name,.grid td.c-name{position:static}
+  .grid td.sel{outline:0}
+  .grid td.cur{background-image:none}
+  .grid tr.dummy{display:none}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <input id="title" aria-label="賽事名稱" placeholder="點這裡輸入賽事名稱">
-    <div class="chips"><span class="chip" id="chipN">0 人</span><span class="chip" id="chipR">尚未開賽</span></div>
+<div class="toolbar">
+  <div class="grp">
+    <button class="act" id="bFirst">產生第一輪</button>
+    <button class="act" id="bNext">產生下一輪</button>
+    <button class="act" id="bRank">計算排名</button>
   </div>
-</header>
-<nav><div class="wrap">
-  <button data-tab="roster" class="on">① 參賽名單</button>
-  <button data-tab="rounds">② 對陣與成績</button>
-  <button data-tab="grid">③ 賽程總表</button>
-  <button data-tab="rank">④ 最終排名</button>
-  <button data-tab="help">使用說明</button>
-</div></nav>
+  <span class="sep"></span>
+  <div class="grp">
+    <button id="bWd" title="把選取那一列的選手標記為棄賽（姓名後加「(棄)」），再按一次恢復">棄賽／恢復</button>
+    <button id="bUndo" title="Ctrl+Z">復原</button>
+    <label>輪數 <select id="selRounds"></select></label>
+  </div>
+  <span class="sep"></span>
+  <div class="grp">
+    <button id="bPrint">列印</button>
+    <button id="bCsv">匯出 CSV</button>
+    <button id="bBackup">下載備份</button>
+    <label class="btn">讀入備份<input type="file" id="fRestore" accept=".json" hidden></label>
+    <button id="bClear">清空</button>
+  </div>
+</div>
 
-<main class="wrap">
-  <!-- ① 參賽名單 -->
-  <section id="tab-roster" class="on">
-    <div class="card">
-      <h2>參賽名單</h2>
-      <p class="hint">依抽籤後的籤號順序，一行一位選手（第 1 行就是 1 號）。可以直接從 Excel 整欄複製貼上。</p>
-      <textarea id="names" placeholder="王小明&#10;李大華&#10;陳志強&#10;…"></textarea>
-      <div class="row" style="margin-top:10px">
-        <label>比賽輪數 <select id="maxRounds"></select></label>
-        <button class="btn primary" id="applyNames">套用名單</button>
-        <span class="hint" id="namesCount"></span>
-      </div>
-    </div>
-    <div class="card" id="rosterCard" style="display:none">
-      <h2>目前選手 <span class="hint">（中途棄賽請按「棄賽」，下一輪排陣會自動排除）</span></h2>
-      <div class="roster-list" id="rosterList"></div>
+<main>
+  <section class="sheet on" id="s-sheet">
+    <input class="title" id="title" placeholder="（點這裡輸入賽事名稱）" aria-label="賽事名稱">
+    <div class="wrap" id="wrap">
+      <table class="grid" id="grid"></table>
+      <input class="kb" id="kb" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="儲存格輸入">
     </div>
   </section>
 
-  <!-- ② 對陣與成績 -->
-  <section id="tab-rounds">
-    <div class="card">
-      <div class="row no-print">
-        <button class="btn primary" id="pairNext">排第一輪</button>
-        <button class="btn" id="repair">重排本輪</button>
-        <button class="btn" id="printRound">列印對陣表</button>
-        <span class="progress" id="progress"></span>
-      </div>
-      <div class="msg" id="roundMsg"></div>
-      <div class="rtabs no-print" id="roundTabs"></div>
-      <div class="print-only" id="roundPrintTitle"></div>
-      <div class="scroll"><table class="pairs" id="pairsTable"></table></div>
-      <p class="hint no-print" style="margin-top:10px">點選手名字＝登記他獲勝（○），再點一次可取消。</p>
-    </div>
+  <section class="sheet" id="s-rank">
+    <div class="pad" id="rankPad"></div>
   </section>
 
-  <!-- ③ 賽程總表 -->
-  <section id="tab-grid">
-    <div class="card">
-      <div class="row no-print" style="margin-bottom:12px">
-        <button class="btn" id="exportGrid">匯出 CSV（Excel 可開）</button>
-        <button class="btn" onclick="window.print()">列印</button>
-      </div>
-      <div class="print-only" id="gridPrintTitle"></div>
-      <div class="scroll"><table id="gridTable"></table></div>
-    </div>
-  </section>
-
-  <!-- ④ 最終排名 -->
-  <section id="tab-rank">
-    <div class="card">
-      <div class="row no-print" style="margin-bottom:12px">
-        <button class="btn primary" id="calcRank">計算排名</button>
-        <button class="btn" id="exportRank">匯出 CSV（Excel 可開）</button>
-        <button class="btn" onclick="window.print()">列印</button>
-      </div>
-      <div class="msg" id="rankMsg"></div>
-      <div class="print-only" id="rankPrintTitle"></div>
-      <div class="scroll"><table id="rankTable"></table></div>
-      <p class="hint">排名依序比較：主分 → 第一輔分（對手主分總和）→ 第二輔分（所負對手主分）→ 直接對戰勝負 → 第四輔分（對手第一輔分總和）。第三輔分欄的 1 表示「曾贏過主分與第一、二輔分都相同的對手」。</p>
-    </div>
-  </section>
-
-  <!-- 使用說明 -->
-  <section id="tab-help">
-    <div class="card help">
-      <h2>使用說明</h2>
-      <ol>
-        <li>在「① 參賽名單」依籤號順序貼上選手姓名，選好比賽輪數，按「套用名單」。</li>
-        <li>到「② 對陣與成績」按「排第一輪」，系統依 1 對 2、3 對 4… 排出第一輪；人數為單數時最後一位輪空。</li>
-        <li>每盤下完，點勝方的名字登記成績（○）。</li>
-        <li>整輪登記完後按「排第 N 輪」，系統依分數組由高到低自動排陣（不重複對戰、輪高輪低資格、必要時漸進放寬）。</li>
-        <li>選手中途棄賽：到「① 參賽名單」按該選手的「棄賽」，下一輪起自動排除。</li>
-        <li>成績登記錯了想重排：修正成績後按「重排本輪」（只能重排最新一輪）。</li>
-        <li>比賽結束，到「④ 最終排名」按「計算排名」，可列印或匯出。</li>
-      </ol>
-      <p class="hint">資料自動存在這台電腦的瀏覽器裡，關掉網頁再開仍會保留。換電腦或怕清掉瀏覽器資料，請用頁尾的「下載備份檔」。</p>
-    </div>
+  <section class="sheet" id="s-help">
+    <div class="pad"><div class="help">
+      <h2>瑞士制系統 使用說明</h2>
+      <table>
+        <tr><td>1</td><td>在「瑞士制賽程表」的<b>姓名</b>欄，依抽籤後的籤號順序輸入選手姓名。可以從 Excel 整欄複製，點第 1 號的姓名格後按 <kbd>Ctrl</kbd>+<kbd>V</kbd> 一次貼上。上方可設定比賽<b>輪數</b>。</td></tr>
+        <tr><td>2</td><td>名單確認無誤後，按 <b>產生第一輪</b>：1 對 2、3 對 4…，人數為單數時最後一位輪空。</td></tr>
+        <tr><td>3</td><td>每盤下完，在勝方的<b>成績</b>格按 <kbd>O</kbd>（或 <kbd>1</kbd>）登記 ○、敗方按 <kbd>X</kbd>（或 <kbd>0</kbd>）登記 ×；對手那一格會自動填上相反的結果。也可以用滑鼠點兩下成績格切換 ○ → × → 空白。</td></tr>
+        <tr><td>4</td><td>整輪登記完後按 <b>產生下一輪</b>，輸入要排第幾輪（預設是下一輪），系統會自動排陣。輸入已排過的輪次可以重排該輪。</td></tr>
+        <tr><td>5</td><td>選手中途棄賽：點該選手那一列，按 <b>棄賽／恢復</b>（或直接在姓名後加「(棄)」），下一輪起自動排除。</td></tr>
+        <tr><td>6</td><td>比賽結束後按 <b>計算排名</b>，會切換到「最終排名」分頁，可列印或匯出。</td></tr>
+      </table>
+      <p><b>操作方式跟 Excel 一樣：</b>方向鍵移動、<kbd>Enter</kbd> 往下、<kbd>Tab</kbd> 往右、直接打字輸入、<kbd>F2</kbd> 或點兩下修改、<kbd>Delete</kbd> 清除、<kbd>Ctrl</kbd>+<kbd>Z</kbd> 復原、<kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd> 複製貼上。對手欄也可以手動修改。</p>
+      <p><b>排名規則：</b>主分 → 第一輔分（對手主分總和）→ 第二輔分（所負對手主分）→ 直接對戰勝負 → 第四輔分（對手第一輔分總和）。第三輔分表示「打贏主分與第一、二輔分都相同的對手」的盤數。</p>
+      <p><b>資料保存：</b>自動存在這台電腦的瀏覽器裡，關掉網頁再開仍會保留。換電腦或怕清掉瀏覽器資料，請用上方的「下載備份」。</p>
+      <p class="credit" id="helpCredit"></p>
+    </div></div>
   </section>
 </main>
 
-<footer>
-  <div class="row" style="justify-content:center;margin-bottom:10px">
-    <button class="btn small" id="backup">下載備份檔</button>
-    <label class="btn small">讀入備份檔<input type="file" id="restore" accept=".json" hidden></label>
-    <button class="btn small" id="resetAll">清空、開新比賽</button>
-  </div>
-  <div id="credit"></div>
-</footer>
+<div class="tabs">
+  <button data-s="sheet" class="on">瑞士制賽程表</button>
+  <button data-s="rank">最終排名</button>
+  <button data-s="help">使用說明</button>
+  <span class="status" id="status"></span>
+</div>
+
+<dialog id="dlg">
+  <div class="dlg-h" id="dlgH">瑞士制排陣系統</div>
+  <div class="dlg-b"><span id="dlgT"></span><input id="dlgI" inputmode="numeric"></div>
+  <div class="dlg-f"><button class="ok" id="dlgOk">確定</button><button id="dlgCancel">取消</button></div>
+</dialog>
+<div class="toast" id="toast"></div>
 
 <script src="swiss-core.js"></script>
 <script>
@@ -199,244 +201,434 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px 16px 32p
   'use strict';
   var KEY = 'swiss-web-v1';
   var core = window.SwissCore;
+  var CN = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五'];
   var state = load() || newState();
-  var viewRound = 1;
+  var COLS = [];
+  var sel = { r: 0, c: 1 };
+  var editing = false;
+  var undoStack = [];
+  var lastRank = null;
+  var curSheet = 'sheet';
 
-  function newState() { return { title: '', maxRounds: 7, rows: [] }; }
-  function load() { try { var s = JSON.parse(localStorage.getItem(KEY)); return s && s.rows ? s : null; } catch (e) { return null; } }
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
   function $(id) { return document.getElementById(id); }
+  function newState() { return { title: '', maxRounds: 7, rows: [] }; }
+  function load() { try { var s = JSON.parse(localStorage.getItem(KEY)); return s && Array.isArray(s.rows) ? s : null; } catch (e) { return null; } }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function n() { return core.countPlayers(state); }
-  function isWin(v) { v = String(v || ''); return v.indexOf('○') >= 0 || v.toUpperCase().indexOf('O') >= 0 || v.indexOf('1') >= 0; }
   function isWd(name) { return /棄|退/.test(name || ''); }
+  function ensure(k) { while (state.rows.length <= k) state.rows.push({ id: String(state.rows.length + 1), name: '', res: [], opp: [] }); }
+  function row(k) { return state.rows[k] || { id: String(k + 1), name: '', res: [], opp: [] }; }
+  function val(k, c) {
+    var col = COLS[c], rw = row(k);
+    if (col.k === 'id') return rw.id;
+    if (col.k === 'name') return rw.name || '';
+    if (col.k === 'res') return rw.res[col.r - 1] || '';
+    if (col.k === 'opp') return rw.opp[col.r - 1] || '';
+    return '';
+  }
+  function isText(c) { var k = COLS[c].k; return k === 'name' || k === 'opp'; }
   function latestRound() {
     var np = n(), last = 0;
     for (var r = 1; r <= state.maxRounds; r++)
       for (var k = 0; k < np; k++) if (state.rows[k].opp[r - 1]) { last = r; break; }
     return last;
   }
-  function scoreBefore(k, r) { var s = 0; for (var i = 0; i < r - 1; i++) if (isWin(state.rows[k].res[i])) s++; return s; }
-  function showMsg(el, text, kind) { el.textContent = text || ''; el.className = 'msg' + (text ? ' show ' + (kind || 'info') : ''); }
-
-  // ---------- 分頁 ----------
-  document.querySelectorAll('nav button').forEach(function (b) {
-    b.onclick = function () {
-      document.querySelectorAll('nav button').forEach(function (x) { x.classList.toggle('on', x === b); });
-      document.querySelectorAll('main section').forEach(function (s) { s.classList.toggle('on', s.id === 'tab-' + b.dataset.tab); });
-      render();
-    };
-  });
-
-  // ---------- 名單 ----------
-  for (var i = 1; i <= 15; i++) $('maxRounds').insertAdjacentHTML('beforeend', '<option value="' + i + '">' + i + ' 輪</option>');
-  $('names').oninput = function () { var c = parseNames().length; $('namesCount').textContent = c ? '共 ' + c + ' 人' : ''; };
-  function parseNames() { return $('names').value.split(/\r?\n/).map(function (s) { return s.replace(/\t.*$/, '').trim(); }).filter(Boolean); }
-
-  $('applyNames').onclick = function () {
-    var names = parseNames();
-    if (names.length < 2) return alert('至少要 2 位選手。');
-    var mr = Number($('maxRounds').value);
-    var started = latestRound() > 0;
-    if (started && mr < latestRound()) return alert('已經排到第 ' + latestRound() + ' 輪，輪數不能設得比這個少。');
-    if (started && names.length === n()) {
-      // 人數相同：只更新姓名，保留對陣與成績
-      names.forEach(function (nm, k) { state.rows[k].name = nm; });
-    } else {
-      if (started && !confirm('比賽已經開始，人數改變會清除所有對陣與成績，確定嗎？')) return;
-      state.rows = names.map(function (nm, k) { return { id: String(k + 1), name: nm, res: [], opp: [] }; });
-    }
-    state.maxRounds = mr;
-    save(); render();
-  };
-
-  function renderRoster() {
-    var np = n();
-    if (document.activeElement !== $('names')) {
-      $('names').value = state.rows.slice(0, np).map(function (r) { return r.name; }).join('\n');
-      $('namesCount').textContent = np ? '共 ' + np + ' 人' : '';
-    }
-    $('maxRounds').value = state.maxRounds;
-    $('rosterCard').style.display = np ? '' : 'none';
-    $('rosterList').innerHTML = state.rows.slice(0, np).map(function (r, k) {
-      var wd = isWd(r.name);
-      return '<div class="roster-item' + (wd ? ' wd' : '') + '"><span class="nm">' + esc(r.id) + '. ' + esc(r.name) + '</span>' +
-        '<button class="btn small" data-wd="' + k + '">' + (wd ? '恢復' : '棄賽') + '</button></div>';
-    }).join('');
-  }
-  $('rosterList').onclick = function (e) {
-    var k = e.target.dataset && e.target.dataset.wd;
-    if (k === undefined) return;
-    var row = state.rows[k];
-    if (isWd(row.name)) {
-      if (!confirm('恢復「' + row.name + '」參賽？')) return;
-      row.name = row.name.replace(/[(（]?[棄退][)）]?/g, '').trim();
-    } else {
-      if (!confirm('確定「' + row.name + '」棄賽？下一輪起不再排入。')) return;
-      row.name = row.name + '(棄)';
-    }
-    save(); render();
-  };
-
-  // ---------- 排陣 ----------
-  function unfinished(r) {
-    var c = 0;
-    roundPairs(r).forEach(function (p) { if (p.type === 'game' && !state.rows[p.a].res[r - 1] && !state.rows[p.b].res[r - 1]) c++; });
-    return c;
-  }
-  function doPair(r) {
-    var res;
-    if (r === 1) {
-      // 原版第一輪只清對手欄；網頁版重排時把成績一起清掉
-      state.rows.forEach(function (row) { row.res[0] = ''; });
-      res = core.pairFirstRound(state);
-    } else {
-      res = core.pairNextRound(state, r);
-    }
-    if (res.ok) { viewRound = r; save(); }
-    render();
-    showMsg($('roundMsg'), res.message, !res.ok ? 'err' : (res.tolerance > 0 ? 'warn' : 'info'));
-  }
-  $('pairNext').onclick = function () {
-    if (n() < 2) return alert('請先在「參賽名單」套用名單。');
-    var last = latestRound(), r = last + 1;
-    if (r > state.maxRounds) return;
-    if (last > 0) {
-      var u = unfinished(last);
-      if (u && !confirm('第 ' + last + ' 輪還有 ' + u + ' 盤沒登記成績，確定要排第 ' + r + ' 輪嗎？')) return;
-    }
-    doPair(r);
-  };
-  $('repair').onclick = function () {
-    var last = latestRound();
-    if (!last) return;
-    if (!confirm('重排第 ' + last + ' 輪：會覆蓋這一輪的對陣與已登記的成績，確定嗎？')) return;
-    doPair(last);
-  };
-  $('printRound').onclick = function () { window.print(); };
-
-  // 由對手欄整理出某一輪的對局清單
-  function roundPairs(r) {
-    var np = n(), byId = {}, out = [], seen = {};
+  function roundHasPairs(r) { for (var k = 0; k < n(); k++) if (state.rows[k].opp[r - 1]) return true; return false; }
+  function gamesOf(r) {
+    var np = n(), byId = {}, games = 0, done = 0;
     for (var k = 0; k < np; k++) byId[state.rows[k].id] = k;
     for (k = 0; k < np; k++) {
-      var opp = String(state.rows[k].opp[r - 1] || '');
-      if (!opp) continue;
-      if (opp === '空' || opp === '輪空') out.push({ type: 'bye', a: k });
-      else if (opp.indexOf('棄') >= 0) continue;
-      else if (byId[opp] !== undefined) {
-        var j = byId[opp], key = Math.min(k, j) + '-' + Math.max(k, j);
-        if (seen[key]) continue;
-        seen[key] = 1;
-        var sa = scoreBefore(k, r), sb = scoreBefore(j, r);
-        // 分數高（同分則籤號小）的放左邊
-        if (sb > sa || (sb === sa && j < k)) out.push({ type: 'game', a: j, b: k });
-        else out.push({ type: 'game', a: k, b: j });
+      var j = byId[state.rows[k].opp[r - 1]];
+      if (j === undefined || j <= k) continue;
+      games++;
+      if (state.rows[k].res[r - 1] || state.rows[j].res[r - 1]) done++;
+    }
+    return { games: games, done: done };
+  }
+
+  // ---------- 對話框 ----------
+  function dialog(text, opt) {
+    opt = opt || {};
+    return new Promise(function (resolve) {
+      var d = $('dlg');
+      $('dlgH').textContent = opt.title || '瑞士制排陣系統';
+      $('dlgT').textContent = text;
+      $('dlgI').style.display = opt.input !== undefined ? '' : 'none';
+      $('dlgI').value = opt.input !== undefined ? opt.input : '';
+      $('dlgCancel').style.display = opt.cancel ? '' : 'none';
+      function done(ok) {
+        d.close(); $('dlgOk').onclick = $('dlgCancel').onclick = null; d.oncancel = null;
+        resolve(ok ? (opt.input !== undefined ? $('dlgI').value : true) : (opt.input !== undefined ? null : false));
+        if (curSheet === 'sheet') focusKb();
+      }
+      $('dlgOk').onclick = function () { done(true); };
+      $('dlgCancel').onclick = function () { done(false); };
+      d.oncancel = function (e) { e.preventDefault(); done(false); };
+      $('dlgI').onkeydown = function (e) { if (e.key === 'Enter') { e.preventDefault(); done(true); } };
+      d.showModal();
+      if (opt.input !== undefined) { $('dlgI').focus(); $('dlgI').select(); } else $('dlgOk').focus();
+    });
+  }
+  function msg(text) { return dialog(text); }
+  function ask(text) { return dialog(text, { cancel: true }); }
+  var toastTimer;
+  function toast(text) {
+    var t = $('toast'); t.textContent = text; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 3200);
+  }
+
+  // ---------- 復原 ----------
+  function pushUndo() {
+    undoStack.push(JSON.stringify({ rows: state.rows, maxRounds: state.maxRounds }));
+    if (undoStack.length > 100) undoStack.shift();
+  }
+  function undo() {
+    if (!undoStack.length) return toast('沒有可以復原的動作');
+    var s = JSON.parse(undoStack.pop());
+    state.rows = s.rows; state.maxRounds = s.maxRounds;
+    lastRank = null; save(); renderAll();
+  }
+
+  // ---------- 欄位 ----------
+  function buildCols() {
+    COLS = [{ k: 'id' }, { k: 'name' }];
+    for (var r = 1; r <= state.maxRounds; r++) COLS.push({ k: 'res', r: r }, { k: 'opp', r: r });
+    ['main', 'sos', 'sodos', 'head', 'sosos', 'rank'].forEach(function (k) { COLS.push({ k: k, stat: true }); });
+    if (sel.c >= COLS.length) sel.c = COLS.length - 1;
+  }
+
+  // 總主分及輔分：照 Excel 賽程表上的公式計算（名次則用 VBA 排名結果）
+  function stats() {
+    var rows = state.rows, R = state.maxRounds, byId = {}, k, r;
+    rows.forEach(function (x, i) { if (byId[x.id] === undefined) byId[x.id] = i; });
+    var main = rows.map(function (x) { var s = 0; for (r = 0; r < R; r++) if (x.res[r] === '○') s++; return s; });
+    function opp(x, r) { var o = x.opp[r]; if (!o || o === '空') return -1; var j = byId[o]; return j === undefined ? -1 : j; }
+    var sos = [], sodos = [];
+    rows.forEach(function (x, i) {
+      var a = 0, b = 0;
+      for (r = 0; r < R; r++) { var j = opp(x, r); if (j >= 0) { a += main[j]; if (x.res[r] === '×') b += main[j]; } }
+      sos[i] = a; sodos[i] = b;
+    });
+    var head = [], sosos = [];
+    rows.forEach(function (x, i) {
+      var h = 0, s = 0;
+      for (r = 0; r < R; r++) {
+        var j = opp(x, r); if (j < 0) continue;
+        s += sos[j];
+        if (x.res[r] === '○' && main[i] === main[j] && sos[i] === sos[j] && sodos[i] === sodos[j]) h++;
+      }
+      head[i] = h; sosos[i] = s;
+    });
+    var rank = {};
+    if (n() >= 2 && rows.some(function (x) { return x.res.some(Boolean); })) {
+      var rk = core.computeRanking(JSON.parse(JSON.stringify(state)));
+      if (rk.ok) rk.rows.forEach(function (x) { if (!x.withdrawn) rank[x.id] = x.rank; });
+    }
+    return { main: main, sos: sos, sodos: sodos, head: head, sosos: sosos, rank: rank };
+  }
+
+  // ---------- 畫表格 ----------
+  function displayRows() { return Math.max(n() + 11, 20, state.rows.length); }
+  function renderGrid() {
+    var np = n(), D = displayRows(), st = stats(), R = state.maxRounds, k, r;
+    var h = '<thead><tr><th rowspan="2" class="h-id">籤號</th><th rowspan="2" class="h-name">姓名</th>';
+    for (r = 1; r <= R; r++) h += '<th colspan="2" class="rs">第' + CN[r] + '輪</th>';
+    h += '<th colspan="5" class="h-stat">總主分及輔分</th><th rowspan="2" class="k-rank">名次</th></tr><tr>';
+    for (r = 1; r <= R; r++) h += '<th class="h-res rs">成績</th><th class="h-opp">對手</th>';
+    h += '<th class="k-main">總主分</th><th class="k-sos">第一輔分</th><th class="k-sodos">第二輔分</th><th class="k-head">第三輔分</th><th class="k-sosos">第四輔分</th></tr></thead><tbody>';
+    for (k = 0; k < D; k++) {
+      var rw = row(k), isP = k < np;
+      var cls = isP && isWd(rw.name) ? 'wd' : (k === np && rw.opp.some(Boolean) ? 'dummy' : '');
+      h += '<tr class="' + cls + '" data-k="' + k + '">';
+      for (var c = 0; c < COLS.length; c++) {
+        var col = COLS[c], v = '', tc = '';
+        if (col.k === 'id') { v = rw.id; tc = 'c-id'; }
+        else if (col.k === 'name') { v = rw.name; tc = 'c-name'; }
+        else if (col.k === 'res') { v = rw.res[col.r - 1] || ''; tc = 'c-res rs'; }
+        else if (col.k === 'opp') { v = rw.opp[col.r - 1] || ''; tc = 'c-opp'; }
+        else {
+          tc = 'st k-' + col.k;
+          if (isP) v = col.k === 'rank' ? (isWd(rw.name) ? '-' : (st.rank[rw.id] || '')) : st[col.k][k];
+        }
+        h += '<td class="' + tc + '" data-c="' + c + '">' + esc(v) + '</td>';
+      }
+      h += '</tr>';
+    }
+    $('grid').innerHTML = h + '</tbody>';
+    showSel(false);
+  }
+  function cell(r, c) { var tr = $('grid').tBodies[0] && $('grid').tBodies[0].rows[r]; return tr ? tr.cells[c] : null; }
+  var prevSel = null, prevRow = null;
+  function showSel(scroll) {
+    if (prevSel) prevSel.classList.remove('sel');
+    if (prevRow) for (var i = 0; i < 2; i++) prevRow.cells[i].classList.remove('cur');
+    var td = cell(sel.r, sel.c);
+    if (!td) return;
+    td.classList.add('sel'); prevSel = td;
+    prevRow = td.parentNode; prevRow.cells[0].classList.add('cur'); prevRow.cells[1].classList.add('cur');
+    if (scroll) ensureVisible(td);
+    placeKb();
+    renderStatus();
+  }
+  function ensureVisible(td) {
+    var w = $('wrap'), wr = w.getBoundingClientRect(), r = td.getBoundingClientRect();
+    var head = $('grid').tHead.getBoundingClientRect().height;
+    var left = $('grid').tBodies[0].rows[0].cells[1].getBoundingClientRect().right - wr.left;
+    if (sel.c > 1) {
+      if (r.left - wr.left < left) w.scrollLeft -= left - (r.left - wr.left);
+      else if (r.right > wr.right - 14) w.scrollLeft += r.right - wr.right + 14;
+    }
+    if (r.top - wr.top < head) w.scrollTop -= head - (r.top - wr.top);
+    else if (r.bottom > wr.bottom - 14) w.scrollTop += r.bottom - wr.bottom + 14;
+  }
+  function placeKb() {
+    var td = cell(sel.r, sel.c), kb = $('kb'), w = $('wrap');
+    if (!td) return;
+    var wr = w.getBoundingClientRect(), r = td.getBoundingClientRect();
+    kb.style.left = (r.left - wr.left + w.scrollLeft) + 'px';
+    kb.style.top = (r.top - wr.top + w.scrollTop) + 'px';
+    kb.style.width = Math.max(r.width, editing && COLS[sel.c].k === 'name' ? 140 : 0) + 'px';
+    kb.style.height = r.height + 'px';
+    kb.inputMode = isText(sel.c) ? 'text' : 'none';
+  }
+  function focusKb() { if (curSheet === 'sheet' && !$('dlg').open) $('kb').focus({ preventScroll: true }); }
+
+  // ---------- 修改資料 ----------
+  function setText(k, c, v) {
+    var col = COLS[c];
+    if (col.k !== 'name' && col.k !== 'opp') return;
+    if (val(k, c) === v) return;
+    pushUndo(); ensure(k);
+    if (col.k === 'name') state.rows[k].name = v; else state.rows[k].opp[col.r - 1] = v;
+    lastRank = null; save(); renderGrid();
+  }
+  // 登記成績：對手那一格自動填相反結果（僅限雙方互為對手時）
+  function setResult(k, r, v, noUndo) {
+    if (!noUndo) pushUndo();
+    ensure(k);
+    var me = state.rows[k];
+    me.res[r - 1] = v;
+    var o = me.opp[r - 1] || '';
+    if (o && o !== '空' && o.indexOf('棄') < 0) {
+      for (var j = 0; j < state.rows.length; j++) {
+        var x = state.rows[j];
+        if (j !== k && x.id === o && x.opp[r - 1] === me.id) {
+          x.res[r - 1] = v === '○' ? '×' : (v === '×' ? '○' : '');
+          break;
+        }
       }
     }
-    out.forEach(function (p) {
-      var sa = scoreBefore(p.a, r), sb = p.type === 'game' ? scoreBefore(p.b, r) : -1;
-      p.hi = Math.max(sa, sb); p.sum = sa + sb;
-    });
-    out.sort(function (x, y) {
-      if (x.type !== y.type) return x.type === 'bye' ? 1 : -1;
-      return y.hi - x.hi || y.sum - x.sum || x.a - y.a;
-    });
-    return out;
+    lastRank = null; save(); renderGrid();
+  }
+  function mapRes(s) {
+    s = String(s).trim();
+    if (/^[oO1○〇]$/.test(s)) return '○';
+    if (/^[xX0×*]$/.test(s)) return '×';
+    return null;
+  }
+  function cycleRes() {
+    var col = COLS[sel.c]; if (col.k !== 'res') return;
+    var v = val(sel.r, sel.c);
+    setResult(sel.r, col.r, v === '' ? '○' : (v === '○' ? '×' : ''));
+  }
+  function clearCell() {
+    var col = COLS[sel.c];
+    if (col.k === 'res') { if (val(sel.r, sel.c)) setResult(sel.r, col.r, ''); }
+    else if (isText(sel.c)) setText(sel.r, sel.c, '');
   }
 
-  function renderRounds() {
-    var last = latestRound();
-    if (viewRound > Math.max(last, 1)) viewRound = Math.max(last, 1);
-    var nextR = last + 1;
-    $('pairNext').textContent = last === 0 ? '排第一輪' : (nextR <= state.maxRounds ? '排第 ' + nextR + ' 輪' : '已排完全部 ' + state.maxRounds + ' 輪');
-    $('pairNext').disabled = nextR > state.maxRounds || n() < 2;
-    $('repair').textContent = last ? '重排第 ' + last + ' 輪' : '重排本輪';
-    $('repair').disabled = !last;
-
-    var tabs = '';
-    for (var r = 1; r <= state.maxRounds; r++)
-      tabs += '<button class="rtab' + (r === viewRound ? ' on' : '') + '" data-r="' + r + '"' + (r > last ? ' disabled' : '') + '>第 ' + r + ' 輪</button>';
-    $('roundTabs').innerHTML = tabs;
-
-    if (!last) { $('pairsTable').innerHTML = ''; $('progress').textContent = ''; return; }
-    var rr = viewRound, pairs = roundPairs(rr), done = 0, games = 0;
-    var html = '<tr><th>桌次</th><th>籤號</th><th>選手</th><th>對</th><th>選手</th><th>籤號</th></tr>';
-    var t = 0;
-    pairs.forEach(function (p) {
-      var A = state.rows[p.a];
-      if (p.type === 'bye') {
-        html += '<tr><td>—</td><td>' + esc(A.id) + '</td><td>' + esc(A.name) + ' <span class="sc">' + scoreBefore(p.a, rr) + '勝</span></td><td colspan="3">輪空（記勝）</td></tr>';
-        return;
-      }
-      var B = state.rows[p.b];
-      games++; t++;
-      var wa = isWin(A.res[rr - 1]), wb = isWin(B.res[rr - 1]);
-      if (wa || wb) done++;
-      var ca = wa ? 'w' : (wb ? 'l' : ''), cb = wb ? 'w' : (wa ? 'l' : '');
-      html += '<tr><td>' + t + '</td><td>' + esc(A.id) + '</td>' +
-        '<td class="p ' + ca + '" data-a="' + p.a + '" data-b="' + p.b + '">' + esc(A.name) + ' <span class="sc">' + scoreBefore(p.a, rr) + '勝</span></td>' +
-        '<td>vs</td>' +
-        '<td class="p ' + cb + '" data-a="' + p.b + '" data-b="' + p.a + '">' + esc(B.name) + ' <span class="sc">' + scoreBefore(p.b, rr) + '勝</span></td>' +
-        '<td>' + esc(B.id) + '</td></tr>';
-    });
-    $('pairsTable').innerHTML = html;
-    $('progress').textContent = '第 ' + rr + ' 輪成績登記 ' + done + ' / ' + games + ' 盤';
-    $('roundPrintTitle').textContent = (state.title || '瑞士制比賽') + '　第 ' + rr + ' 輪對陣表';
+  // ---------- 儲存格編輯 ----------
+  function startEdit(initial) {
+    if (!isText(sel.c)) return;
+    editing = true;
+    var kb = $('kb');
+    kb.classList.add('editing');
+    if (initial !== undefined) kb.value = initial;
+    placeKb();
+    kb.focus({ preventScroll: true });
+    var L = kb.value.length; try { kb.setSelectionRange(L, L); } catch (e) {}
   }
-  $('roundTabs').onclick = function (e) { var r = e.target.dataset && e.target.dataset.r; if (r) { viewRound = Number(r); renderRounds(); } };
-  $('pairsTable').onclick = function (e) {
-    var td = e.target.closest('td.p'); if (!td) return;
-    var a = state.rows[td.dataset.a], b = state.rows[td.dataset.b], r = viewRound - 1;
-    if (isWin(a.res[r])) { a.res[r] = ''; b.res[r] = ''; }
-    else { a.res[r] = '○'; b.res[r] = '×'; }
-    save(); render();
+  function endEdit(commit) {
+    if (!editing) return;
+    var kb = $('kb'), v = kb.value.trim();
+    editing = false; kb.classList.remove('editing'); kb.value = '';
+    if (commit) setText(sel.r, sel.c, v);
+    placeKb();
+  }
+  function move(dr, dc) {
+    sel.r = Math.max(0, Math.min(displayRows() - 1, sel.r + dr));
+    sel.c = Math.max(0, Math.min(COLS.length - 1, sel.c + dc));
+    showSel(true);
+  }
+
+  var kb = $('kb');
+  kb.addEventListener('keydown', function (e) {
+    if (e.isComposing || e.keyCode === 229) return;
+    if (editing) {
+      if (e.key === 'Enter') { e.preventDefault(); endEdit(true); move(e.shiftKey ? -1 : 1, 0); }
+      else if (e.key === 'Tab') { e.preventDefault(); endEdit(true); move(0, e.shiftKey ? -1 : 1); }
+      else if (e.key === 'Escape') { e.preventDefault(); endEdit(false); }
+      else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); endEdit(true); move(e.key === 'ArrowUp' ? -1 : 1, 0); }
+      return;
+    }
+    var ctrl = e.ctrlKey || e.metaKey;
+    if (ctrl && (e.key === 'z' || e.key === 'Z')) { e.preventDefault(); return undo(); }
+    if (ctrl) return; // 讓 Ctrl+C / Ctrl+V 觸發 copy / paste 事件
+    switch (e.key) {
+      case 'ArrowUp': e.preventDefault(); return move(-1, 0);
+      case 'ArrowDown': e.preventDefault(); return move(1, 0);
+      case 'ArrowLeft': e.preventDefault(); return move(0, -1);
+      case 'ArrowRight': e.preventDefault(); return move(0, 1);
+      case 'Enter': e.preventDefault(); return move(e.shiftKey ? -1 : 1, 0);
+      case 'Tab': e.preventDefault(); return move(0, e.shiftKey ? -1 : 1);
+      case 'Home': e.preventDefault(); sel.c = 1; return showSel(true);
+      case 'Delete': case 'Backspace': e.preventDefault(); return clearCell();
+      case 'F2': e.preventDefault(); return startEdit(val(sel.r, sel.c));
+      case ' ': if (COLS[sel.c].k === 'res') { e.preventDefault(); return cycleRes(); }
+    }
+  });
+  kb.addEventListener('compositionstart', function () { if (!editing && isText(sel.c)) startEdit(); });
+  kb.addEventListener('input', function () {
+    if (editing) return;
+    var col = COLS[sel.c];
+    if (col.k === 'res') {
+      var v = mapRes(kb.value.slice(-1)); kb.value = '';
+      if (v) setResult(sel.r, col.r, v);
+    } else if (isText(sel.c)) {
+      startEdit();
+    } else {
+      kb.value = '';
+    }
+  });
+  kb.addEventListener('blur', function () { if (editing) endEdit(true); });
+  kb.addEventListener('copy', function (e) {
+    if (editing) return;
+    e.preventDefault(); e.clipboardData.setData('text/plain', val(sel.r, sel.c));
+  });
+  // 貼上：支援從 Excel 複製一整塊（多列多欄）
+  kb.addEventListener('paste', function (e) {
+    if (editing) return;
+    e.preventDefault();
+    var text = (e.clipboardData || window.clipboardData).getData('text');
+    var lines = text.replace(/\r/g, '').split('\n');
+    if (lines.length > 1 && lines[lines.length - 1] === '') lines.pop();
+    pushUndo();
+    lines.forEach(function (line, i) {
+      line.split('\t').forEach(function (v, j) {
+        var k = sel.r + i, c = sel.c + j, col = COLS[c];
+        if (!col) return;
+        v = v.trim();
+        ensure(k);
+        if (col.k === 'name') state.rows[k].name = v;
+        else if (col.k === 'opp') state.rows[k].opp[col.r - 1] = v;
+        else if (col.k === 'res') state.rows[k].res[col.r - 1] = mapRes(v) || '';
+      });
+    });
+    lastRank = null; save(); renderAll();
+    toast('已貼上 ' + lines.length + ' 列');
+  });
+
+  var wrap = $('wrap');
+  wrap.addEventListener('mousedown', function (e) {
+    var td = e.target.closest('td'); if (!td || e.target === kb) return;
+    e.preventDefault();
+    if (editing) endEdit(true);
+    var k = Number(td.parentNode.dataset.k), c = Number(td.dataset.c);
+    var same = k === sel.r && c === sel.c;
+    sel.r = k; sel.c = c; showSel(false);
+    focusKb();
+    if (same && COLS[c].k === 'res') cycleRes();
+  });
+  wrap.addEventListener('dblclick', function (e) {
+    var td = e.target.closest('td'); if (!td) return;
+    if (isText(sel.c)) startEdit(val(sel.r, sel.c));
+  });
+  wrap.addEventListener('scroll', placeKb);
+  window.addEventListener('resize', placeKb);
+
+  // ---------- 排陣按鈕 ----------
+  $('bFirst').onclick = async function () {
+    if (editing) endEdit(true);
+    var np = n();
+    if (np < 2) return msg('人數不足無法排陣，請確認名單！');
+    if (roundHasPairs(1) && !(await ask('第一輪已經有對戰組合，重新產生會覆蓋第一輪的對陣與成績，確定嗎？'))) return;
+    pushUndo();
+    state.rows.forEach(function (x) { x.res[0] = ''; });
+    var res = core.pairFirstRound(state);
+    lastRank = null; save(); renderAll();
+    sel.c = 3; sel.r = 0; showSel(true);
+    toast(res.message + '\n系統設計者：' + core.AUTHOR);
   };
-
-  // ---------- 總表 ----------
-  function gridData() {
-    var np = n(), last = Math.max(latestRound(), 1);
-    var head = ['籤號', '姓名'];
-    for (var r = 1; r <= last; r++) head.push('第' + r + '輪成績', '第' + r + '輪對手');
-    head.push('主分');
-    var body = state.rows.slice(0, np).map(function (row, k) {
-      var line = [row.id, row.name];
-      for (var r = 1; r <= last; r++) line.push(row.res[r - 1] || '', row.opp[r - 1] || '');
-      line.push(scoreBefore(k, last + 1));
-      return line;
-    });
-    return { head: head, body: body };
-  }
-  function renderGrid() {
-    var g = gridData();
-    $('gridTable').innerHTML = '<tr>' + g.head.map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>' +
-      g.body.map(function (l) { return '<tr' + (isWd(l[1]) ? ' class="wd"' : '') + '>' + l.map(function (c) { return '<td>' + esc(c) + '</td>'; }).join('') + '</tr>'; }).join('');
-    $('gridPrintTitle').textContent = (state.title || '瑞士制比賽') + '　賽程總表';
-  }
-
-  // ---------- 排名 ----------
-  var lastRank = null;
-  var RANK_HEAD = ['名次', '籤號', '姓名', '主分', '第一輔分', '第二輔分', '第三輔分', '第四輔分'];
-  $('calcRank').onclick = function () {
-    var res = core.computeRanking(state);
-    if (!res.ok) { lastRank = null; showMsg($('rankMsg'), res.message, 'err'); return renderRank(); }
-    lastRank = res.rows;
-    showMsg($('rankMsg'), '成績排名計算完成（統計到第 ' + res.maxR + ' 輪）。', 'info');
-    renderRank();
+  $('bNext').onclick = async function () {
+    if (editing) endEdit(true);
+    if (n() < 2) return msg('人數不足無法排陣，請確認名單！');
+    var def = Math.max(2, latestRound() + 1);
+    if (def > state.maxRounds) def = state.maxRounds;
+    var input = await dialog('請輸入您要排定第幾輪的賽程？(例如第二輪請輸入 2)', { title: '自動排陣系統', input: String(def), cancel: true });
+    if (input === null || String(input).trim() === '') return;
+    var r = Number(String(input).trim());
+    if (!Number.isInteger(r)) return msg('請輸入正確的數字！');
+    if (r < 2 || r > state.maxRounds) return msg('此系統目前支援第 2 到第 ' + state.maxRounds + ' 輪的排陣！');
+    if (roundHasPairs(r) && !(await ask('第 ' + r + ' 輪已經有對戰組合，重新排會覆蓋第 ' + r + ' 輪的對陣與成績，確定嗎？'))) return;
+    var g = gamesOf(r - 1), left = g.games - g.done;
+    if (left > 0 && !(await ask('第 ' + (r - 1) + ' 輪還有 ' + left + ' 盤沒登記成績，確定要排第 ' + r + ' 輪嗎？'))) return;
+    var snapshot = JSON.stringify(state.rows);
+    var res = core.pairNextRound(state, r);
+    if (!res.ok) { state.rows = JSON.parse(snapshot); renderAll(); return msg(res.message); }
+    undoStack.push(JSON.stringify({ rows: JSON.parse(snapshot), maxRounds: state.maxRounds }));
+    lastRank = null; save(); renderAll();
+    sel.c = 1 + (r - 1) * 2 + 2; sel.r = 0; showSel(true);
+    if (res.tolerance > 0) msg(res.message); else toast(res.message);
   };
+  $('bRank').onclick = function () {
+    if (editing) endEdit(true);
+    var res = core.computeRanking(JSON.parse(JSON.stringify(state)));
+    if (!res.ok) return msg(res.message);
+    lastRank = res;
+    switchSheet('rank');
+    toast('成績排名-計算完成');
+  };
+  $('bWd').onclick = async function () {
+    if (editing) endEdit(true);
+    var k = sel.r;
+    if (k >= n()) return msg('請先點選要棄賽的選手那一列。');
+    var nm = state.rows[k].name;
+    if (isWd(nm)) {
+      if (!(await ask('恢復「' + nm + '」參賽？'))) return;
+      setText(k, 1, nm.replace(/[(（]?[棄退][)）]?/g, '').trim());
+    } else {
+      if (!(await ask('確定「' + nm + '」棄賽？下一輪起不再排入。'))) return;
+      setText(k, 1, nm + '(棄)');
+    }
+    renderStatus();
+  };
+  $('bUndo').onclick = function () { if (editing) endEdit(true); undo(); };
+  for (var i = 1; i <= 15; i++) $('selRounds').insertAdjacentHTML('beforeend', '<option value="' + i + '">' + i + ' 輪</option>');
+  $('selRounds').onchange = function () {
+    var v = Number(this.value), last = latestRound();
+    if (v < last) { this.value = state.maxRounds; return msg('已經排到第 ' + last + ' 輪，輪數不能設得比這個少。'); }
+    pushUndo(); state.maxRounds = v; save(); renderAll();
+  };
+  $('bPrint').onclick = function () { if (editing) endEdit(true); window.print(); };
+
+  // ---------- 最終排名 ----------
   function rankLines() {
-    return (lastRank || []).map(function (x) {
+    return lastRank.rows.map(function (x) {
       return x.withdrawn ? ['-', '', x.name, '', '', '', '', ''] : [x.rank, x.id, x.name, x.main, x.sos, x.sodosL, x.headWin, x.sosos];
     });
   }
+  var RANK_HEAD = ['名次', '籤號', '姓名', '主分', '第一輔分', '第二輔分', '第三輔分', '第四輔分'];
   function renderRank() {
-    if (!lastRank) { $('rankTable').innerHTML = ''; return; }
-    $('rankTable').innerHTML = '<tr>' + RANK_HEAD.map(function (h) { return '<th>' + h + '</th>'; }).join('') + '</tr>' +
-      rankLines().map(function (l) {
-        var cls = l[0] === '-' ? 'wd' : (l[0] <= 3 ? 'rank' + l[0] + ' top' : '');
-        return '<tr class="' + cls + '">' + l.map(function (c) { return '<td>' + esc(c) + '</td>'; }).join('') + '</tr>';
-      }).join('');
-    $('rankPrintTitle').textContent = (state.title || '瑞士制比賽') + '　最終排名';
+    var p = $('rankPad');
+    if (!lastRank) { p.innerHTML = '<div class="empty">請在上方按「計算排名」。</div>'; return; }
+    var h = '<div class="title" style="padding:0 0 12px;text-align:left">' + esc(state.title || '') + '</div><table class="rank"><tr>' +
+      RANK_HEAD.map(function (x) { return '<th>' + x + '</th>'; }).join('') + '</tr>';
+    rankLines().forEach(function (l) {
+      var cls = l[0] === '-' ? 'wd' : (l[0] <= 3 ? 'top r' + l[0] : '');
+      h += '<tr class="' + cls + '">' + l.map(function (c) { return '<td>' + esc(c) + '</td>'; }).join('') + '</tr>';
+    });
+    p.innerHTML = h + '</table><div class="credit">製作：' + esc(core.AUTHOR) + '</div>';
   }
 
   // ---------- 匯出 / 備份 ----------
@@ -451,44 +643,69 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px 16px 32p
       return r.map(function (c) { c = String(c); return /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(',');
     }).join('\r\n');
   }
-  function fname(suffix, ext) { return (state.title || '瑞士制比賽').replace(/[\\/:*?"<>|]/g, '') + '_' + suffix + '.' + ext; }
-  $('exportGrid').onclick = function () { var g = gridData(); download(fname('賽程總表', 'csv'), csv([g.head].concat(g.body)), 'text/csv'); };
-  $('exportRank').onclick = function () {
-    if (!lastRank) return alert('請先按「計算排名」。');
-    download(fname('最終排名', 'csv'), csv([RANK_HEAD].concat(rankLines())), 'text/csv');
+  function fname(s, ext) { return (state.title || '瑞士制比賽').replace(/[\\/:*?"<>|]/g, '') + '_' + s + '.' + ext; }
+  $('bCsv').onclick = function () {
+    if (curSheet === 'rank' && lastRank) return download(fname('最終排名', 'csv'), csv([RANK_HEAD].concat(rankLines())), 'text/csv');
+    var np = n(), st = stats(), R = state.maxRounds, head = ['籤號', '姓名'];
+    for (var r = 1; r <= R; r++) head.push('第' + CN[r] + '輪成績', '第' + CN[r] + '輪對手');
+    head.push('總主分', '第一輔分', '第二輔分', '第三輔分', '第四輔分', '名次');
+    var body = state.rows.slice(0, np).map(function (x, k) {
+      var l = [x.id, x.name];
+      for (var r = 0; r < R; r++) l.push(x.res[r] || '', x.opp[r] || '');
+      l.push(st.main[k], st.sos[k], st.sodos[k], st.head[k], st.sosos[k], isWd(x.name) ? '-' : (st.rank[x.id] || ''));
+      return l;
+    });
+    download(fname('賽程表', 'csv'), csv([head].concat(body)), 'text/csv');
   };
-  $('backup').onclick = function () { download(fname('備份', 'json'), JSON.stringify(state), 'application/json'); };
-  $('restore').onchange = function (e) {
+  $('bBackup').onclick = function () { download(fname('備份', 'json'), JSON.stringify(state), 'application/json'); };
+  $('fRestore').onchange = function (e) {
     var f = e.target.files[0]; if (!f) return;
     var rd = new FileReader();
-    rd.onload = function () {
-      try {
-        var s = JSON.parse(rd.result);
-        if (!s || !Array.isArray(s.rows)) throw 0;
-        if (!confirm('讀入備份會取代目前的比賽資料，確定嗎？')) return;
-        state = s; lastRank = null; viewRound = Math.max(latestRound(), 1); save(); render();
-      } catch (err) { alert('這不是有效的備份檔。'); }
+    rd.onload = async function () {
       e.target.value = '';
+      var s;
+      try { s = JSON.parse(rd.result); if (!s || !Array.isArray(s.rows)) throw 0; }
+      catch (err) { return msg('這不是有效的備份檔。'); }
+      if (!(await ask('讀入備份會取代目前的比賽資料，確定嗎？'))) return;
+      pushUndo(); state = s; state.maxRounds = state.maxRounds || 7; lastRank = null; save(); renderAll();
     };
     rd.readAsText(f, 'utf-8');
   };
-  $('resetAll').onclick = function () {
-    if (!confirm('確定清空目前的比賽、開新比賽嗎？（建議先下載備份檔）')) return;
-    state = newState(); lastRank = null; viewRound = 1; save(); render();
+  $('bClear').onclick = async function () {
+    if (!(await ask('確定清空目前的比賽、開新比賽嗎？（建議先下載備份；清空後仍可按「復原」）'))) return;
+    pushUndo(); state = newState(); lastRank = null; sel = { r: 0, c: 1 }; save(); renderAll();
   };
-  $('title').oninput = function () { state.title = $('title').value; save(); };
+  $('title').oninput = function () { state.title = this.value; save(); };
+  $('title').onkeydown = function (e) { if (e.key === 'Enter') { e.preventDefault(); focusKb(); } };
 
-  // ---------- 整體 ----------
-  function render() {
-    var np = n(), last = latestRound();
-    if (document.activeElement !== $('title')) $('title').value = state.title || '';
-    $('chipN').textContent = np + ' 人';
-    $('chipR').textContent = last ? '已排到第 ' + last + ' / ' + state.maxRounds + ' 輪' : '尚未開賽';
-    renderRoster(); renderRounds(); renderGrid(); renderRank();
+  // ---------- 分頁 / 狀態列 ----------
+  function switchSheet(s) {
+    if (editing) endEdit(true);
+    curSheet = s;
+    document.querySelectorAll('.tabs button').forEach(function (b) { b.classList.toggle('on', b.dataset.s === s); });
+    document.querySelectorAll('.sheet').forEach(function (x) { x.classList.toggle('on', x.id === 's-' + s); });
+    if (s === 'rank') renderRank();
+    if (s === 'sheet') { placeKb(); focusKb(); }
   }
-  $('credit').textContent = '瑞士制排陣系統 網頁版　系統設計者：' + core.AUTHOR;
-  viewRound = Math.max(latestRound(), 1);
-  render();
+  document.querySelectorAll('.tabs button').forEach(function (b) { b.onclick = function () { switchSheet(b.dataset.s); }; });
+  function renderStatus() {
+    var np = n(), last = latestRound(), t = '參賽 ' + np + ' 人';
+    if (last) { var g = gamesOf(last); t += '　已排到第 ' + last + ' / ' + state.maxRounds + ' 輪　第 ' + last + ' 輪成績 ' + g.done + ' / ' + g.games + ' 盤'; }
+    else t += '　尚未開賽';
+    $('status').textContent = t;
+  }
+  function renderAll() {
+    buildCols();
+    if (document.activeElement !== $('title')) $('title').value = state.title || '';
+    $('selRounds').value = state.maxRounds;
+    renderGrid();
+    if (curSheet === 'rank') renderRank();
+    renderStatus();
+  }
+
+  $('helpCredit').textContent = '系統設計者：' + core.AUTHOR;
+  renderAll();
+  focusKb();
 })();
 </script>
 </body>
